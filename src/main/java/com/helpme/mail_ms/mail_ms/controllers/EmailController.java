@@ -19,12 +19,6 @@ public class EmailController {
 
     @GetMapping
     public void sendEmail() {
-//        emailEventPublisher.sendEmailEvent(
-//                "recipient@example.com|" +
-//                "Ticket Update: Your Ticket #12345|" +
-//                "Dear Customer, your support ticket #12345 has been updated. Please check your account for more details."
-//        );
-
         emailService.sendSimpleEmail("fischerrobson@gmail.com", "TEST", "Hello stranger");
     }
 

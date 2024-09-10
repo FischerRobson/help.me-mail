@@ -17,22 +17,12 @@ public class EmailEventListener {
 
     @RabbitListener(queues = "#{constants.EMAIL_QUEUE}")
     public void listen(String message) {
-        String to = extractToFromMessage(message);
-        String subject = extractSubjectFromMessage(message);
-        String body = extractBodyFromMessage(message);
+       String[] parts = message.split("\\|");
+       String to = parts[0];
+       String subject = parts[1];
+       String body = parts[2];
 
         emailService.sendSimpleEmail(to, subject, body);
     }
 
-    private String extractToFromMessage(String message) {
-        return "recipient@example.com"; // Example
-    }
-
-    private String extractSubjectFromMessage(String message) {
-        return "Email Subject"; // Example
-    }
-
-    private String extractBodyFromMessage(String message) {
-        return "Email body text"; // Example
-    }
 }
