@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.helpme.mail_ms</groupId>
 	<artifactId>mail-ms</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>mail-ms</name>
 	<description>Project for handling mail</description>
 	<url/>
