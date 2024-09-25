@@ -18,6 +18,8 @@ public class MailMsApplication {
 		if (dotenv != null) {
 			System.setProperty("EMAIL_USERNAME", dotenv.get("EMAIL_USERNAME"));
 			System.setProperty("EMAIL_PASSWORD", dotenv.get("EMAIL_PASSWORD"));
+			System.setProperty("RABBITMQ_HOST", dotenv.get("RABBITMQ_HOST"));
+			System.setProperty("RABBITMQ_EMAIL_QUEUE", dotenv.get("RABBITMQ_EMAIL_QUEUE"));
 		}
 		SpringApplication.run(MailMsApplication.class, args);
 	}
