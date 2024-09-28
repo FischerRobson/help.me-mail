@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Map;
+
 @Getter
 @Setter
 @NoArgsConstructor
 public class Email {
     private String receiver;
-    private String title;
-    private String body;
+    Map<String, Object> variables;
 }

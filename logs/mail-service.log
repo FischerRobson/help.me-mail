@@ -1,0 +1,219 @@
+2024-09-28T14:52:59.453-03:00  INFO 93349 --- [mail-ms] [main] c.h.mail_ms.mail_ms.MailMsApplication    : Starting MailMsApplication using Java 21.0.1 with PID 93349 (/home/fischer/Dev/help.me/mail-ms/target/classes started by fischer in /home/fischer/Dev/help.me/mail-ms)
+2024-09-28T14:52:59.459-03:00  INFO 93349 --- [mail-ms] [main] c.h.mail_ms.mail_ms.MailMsApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-09-28T14:53:01.716-03:00  INFO 93349 --- [mail-ms] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-09-28T14:53:01.743-03:00  INFO 93349 --- [mail-ms] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-28T14:53:01.743-03:00  INFO 93349 --- [mail-ms] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-28T14:53:01.825-03:00  INFO 93349 --- [mail-ms] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-28T14:53:01.826-03:00  INFO 93349 --- [mail-ms] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2228 ms
+2024-09-28T14:53:02.626-03:00  WARN 93349 --- [mail-ms] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: bab9e70c-f363-4942-88d3-dc6edf42beab
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-28T14:53:02.651-03:00  INFO 93349 --- [mail-ms] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-28T14:53:03.573-03:00  INFO 93349 --- [mail-ms] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-09-28T14:53:03.583-03:00  INFO 93349 --- [mail-ms] [main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:03.595-03:00  INFO 93349 --- [mail-ms] [main] o.s.a.r.l.SimpleMessageListenerContainer : Broker not available; cannot force queue declarations during start: java.net.UnknownHostException: helpme-rabbitmq-service: Temporary failure in name resolution
+2024-09-28T14:53:03.611-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:03.614-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+
+org.springframework.amqp.AmqpIOException: java.net.UnknownHostException: helpme-rabbitmq-service
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:622) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:726) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:257) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2249) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2222) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2202) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:467) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:451) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1960) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1924) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1479) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1320) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.UnknownHostException: helpme-rabbitmq-service
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:988) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1818) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1688) ~[na:na]
+	at com.rabbitmq.client.DnsRecordIpAddressResolver.resolveIpAddresses(DnsRecordIpAddressResolver.java:83) ~[amqp-client-5.21.0.jar:5.21.0]
+	at com.rabbitmq.client.DnsRecordIpAddressResolver.getAddresses(DnsRecordIpAddressResolver.java:73) ~[amqp-client-5.21.0.jar:5.21.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1245) ~[amqp-client-5.21.0.jar:5.21.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1198) ~[amqp-client-5.21.0.jar:5.21.0]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:668) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:637) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:584) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	... 12 common frames omitted
+
+2024-09-28T14:53:03.626-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:03.645-03:00  INFO 93349 --- [mail-ms] [main] c.h.mail_ms.mail_ms.MailMsApplication    : Started MailMsApplication in 5.16 seconds (process running for 5.984)
+2024-09-28T14:53:08.637-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@7d66e544: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:53:08.639-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:08.640-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:53:08.640-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:13.644-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@55badda2: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:53:13.645-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:13.647-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:53:13.647-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:18.651-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@1c3e6808: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:53:18.657-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:18.657-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:53:18.657-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:23.661-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@5599d9e9: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:53:23.662-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:23.664-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:53:23.664-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:28.670-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@14f5c0c: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:53:28.672-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:28.672-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:53:28.672-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:33.678-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@418757b: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:53:33.680-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-7] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:33.682-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-7] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:53:33.682-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-7] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:38.685-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-7] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@6aba3d04: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:53:38.687-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:38.688-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:53:38.688-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:43.695-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@59cb2afe: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:53:43.697-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-9] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:43.698-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-9] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:53:43.698-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-9] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:48.702-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-9] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@6d6cc384: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:53:48.703-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-10] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:48.704-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-10] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:53:48.704-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-10] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:53.707-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-10] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@5fd6dc8b: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:53:53.709-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-11] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:53.710-03:00 ERROR 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-11] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:53:53.711-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-11] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:53:56.247-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-12] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to finish.
+2024-09-28T14:53:56.247-03:00  INFO 93349 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-12] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for workers to finish.
+2024-09-28T14:57:47.071-03:00  INFO 106667 --- [mail-ms] [main] c.h.mail_ms.mail_ms.MailMsApplication    : Starting MailMsApplication using Java 21.0.1 with PID 106667 (/home/fischer/Dev/help.me/mail-ms/target/classes started by fischer in /home/fischer/Dev/help.me/mail-ms)
+2024-09-28T14:57:47.076-03:00  INFO 106667 --- [mail-ms] [main] c.h.mail_ms.mail_ms.MailMsApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-09-28T14:57:48.899-03:00  INFO 106667 --- [mail-ms] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-09-28T14:57:48.930-03:00  INFO 106667 --- [mail-ms] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-28T14:57:48.931-03:00  INFO 106667 --- [mail-ms] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-28T14:57:49.005-03:00  INFO 106667 --- [mail-ms] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-28T14:57:49.005-03:00  INFO 106667 --- [mail-ms] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1843 ms
+2024-09-28T14:57:49.688-03:00  WARN 106667 --- [mail-ms] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 98e0ea6a-6862-4243-9d43-10b21d157a53
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-28T14:57:49.711-03:00  INFO 106667 --- [mail-ms] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-28T14:57:50.372-03:00  INFO 106667 --- [mail-ms] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-09-28T14:57:50.380-03:00  INFO 106667 --- [mail-ms] [main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:57:50.388-03:00  INFO 106667 --- [mail-ms] [main] o.s.a.r.l.SimpleMessageListenerContainer : Broker not available; cannot force queue declarations during start: java.net.UnknownHostException: helpme-rabbitmq-service: Temporary failure in name resolution
+2024-09-28T14:57:50.398-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:57:50.399-03:00 ERROR 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+
+org.springframework.amqp.AmqpIOException: java.net.UnknownHostException: helpme-rabbitmq-service
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:70) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:622) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:726) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:257) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2249) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2222) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2202) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:467) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:451) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1960) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1924) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1479) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1320) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.UnknownHostException: helpme-rabbitmq-service
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:988) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1818) ~[na:na]
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1688) ~[na:na]
+	at com.rabbitmq.client.DnsRecordIpAddressResolver.resolveIpAddresses(DnsRecordIpAddressResolver.java:83) ~[amqp-client-5.21.0.jar:5.21.0]
+	at com.rabbitmq.client.DnsRecordIpAddressResolver.getAddresses(DnsRecordIpAddressResolver.java:73) ~[amqp-client-5.21.0.jar:5.21.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1245) ~[amqp-client-5.21.0.jar:5.21.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1198) ~[amqp-client-5.21.0.jar:5.21.0]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:668) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:637) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:584) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	... 12 common frames omitted
+
+2024-09-28T14:57:50.407-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:57:50.422-03:00  INFO 106667 --- [mail-ms] [main] c.h.mail_ms.mail_ms.MailMsApplication    : Started MailMsApplication in 4.242 seconds (process running for 4.997)
+2024-09-28T14:57:55.417-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@2bab618: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:57:55.419-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:57:55.420-03:00 ERROR 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:57:55.420-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:58:00.424-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@7e2159e4: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:58:00.426-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:58:00.428-03:00 ERROR 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:58:00.429-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:58:05.432-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@5fd6dc8b: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:58:05.434-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:58:05.434-03:00 ERROR 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:58:05.434-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:58:10.438-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@600d1892: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+2024-09-28T14:58:10.439-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:58:10.440-03:00 ERROR 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+2024-09-28T14:58:10.441-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [helpme-rabbitmq-service:5672]
+2024-09-28T14:58:12.575-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to finish.
+2024-09-28T14:58:12.575-03:00  INFO 106667 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for workers to finish.
+2024-09-28T14:58:35.779-03:00  INFO 108958 --- [mail-ms] [main] c.h.mail_ms.mail_ms.MailMsApplication    : Starting MailMsApplication using Java 21.0.1 with PID 108958 (/home/fischer/Dev/help.me/mail-ms/target/classes started by fischer in /home/fischer/Dev/help.me/mail-ms)
+2024-09-28T14:58:35.784-03:00  INFO 108958 --- [mail-ms] [main] c.h.mail_ms.mail_ms.MailMsApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-09-28T14:58:37.552-03:00  INFO 108958 --- [mail-ms] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-09-28T14:58:37.574-03:00  INFO 108958 --- [mail-ms] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-28T14:58:37.575-03:00  INFO 108958 --- [mail-ms] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-28T14:58:37.651-03:00  INFO 108958 --- [mail-ms] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-28T14:58:37.652-03:00  INFO 108958 --- [mail-ms] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1766 ms
+2024-09-28T14:58:38.278-03:00  WARN 108958 --- [mail-ms] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: f963bbd1-9ed5-4b54-ad8d-fe0b8469171d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-28T14:58:38.303-03:00  INFO 108958 --- [mail-ms] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-28T14:58:39.068-03:00  INFO 108958 --- [mail-ms] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-09-28T14:58:39.078-03:00  INFO 108958 --- [mail-ms] [main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [localhost:5672]
+2024-09-28T14:58:39.159-03:00  INFO 108958 --- [mail-ms] [main] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#2aa7399c:0/SimpleConnection@17ff8810 [delegate=amqp://guest@127.0.0.1:5672/, localPort=35916]
+2024-09-28T14:58:39.175-03:00  INFO 108958 --- [mail-ms] [main] o.s.amqp.rabbit.core.RabbitAdmin         : Auto-declaring a non-durable, auto-delete, or exclusive Queue (emailQueue) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost.
+2024-09-28T14:58:39.270-03:00  INFO 108958 --- [mail-ms] [main] c.h.mail_ms.mail_ms.MailMsApplication    : Started MailMsApplication in 4.361 seconds (process running for 5.075)
+2024-09-28T15:05:54.688-03:00  INFO 108958 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] o.s.a.r.l.SimpleMessageListenerContainer : Restarting Consumer@4def7d36: tags=[[amq.ctag-ohcgrz0NVRMrMZ9sIbBRtw]], channel=Cached Rabbit Channel: AMQChannel(amqp://guest@127.0.0.1:5672/,1), conn: Proxy@6a567f7b Shared Rabbit Connection: SimpleConnection@17ff8810 [delegate=amqp://guest@127.0.0.1:5672/, localPort=35916], acknowledgeMode=AUTO local queue size=0
+2024-09-28T15:05:54.692-03:00  INFO 108958 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [localhost:5672]
+2024-09-28T15:05:54.695-03:00 ERROR 108958 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.l.SimpleMessageListenerContainer : Failed to check/redeclare auto-delete queue(s).
+
+org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:61) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:622) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:726) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createBareChannel(CachingConnectionFactory.java:671) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.getCachedChannelProxy(CachingConnectionFactory.java:644) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.getChannel(CachingConnectionFactory.java:533) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory$ChannelCachingConnectionProxy.createChannel(CachingConnectionFactory.java:1486) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2255) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2222) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2202) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:467) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:451) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1960) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1924) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1479) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1320) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:751) ~[na:na]
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:61) ~[amqp-client-5.21.0.jar:5.21.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1249) ~[amqp-client-5.21.0.jar:5.21.0]
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1198) ~[amqp-client-5.21.0.jar:5.21.0]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:668) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:637) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:584) ~[spring-rabbit-3.1.7.jar:3.1.7]
+	... 15 common frames omitted
+
+2024-09-28T15:05:54.701-03:00  INFO 108958 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [localhost:5672]
+2024-09-28T15:05:57.109-03:00  INFO 108958 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] o.s.a.r.l.SimpleMessageListenerContainer : Waiting for workers to finish.
+2024-09-28T15:05:57.110-03:00  INFO 108958 --- [mail-ms] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] o.s.a.r.l.SimpleMessageListenerContainer : Successfully waited for workers to finish.

@@ -17,9 +17,9 @@ public class EmailController {
     @Autowired
     EmailService emailService;
 
-    @GetMapping
-    public void sendEmail() {
-        emailService.sendSimpleEmail("fischerrobson@gmail.com", "TEST", "Hello stranger");
-    }
+//    @GetMapping
+//    public void sendEmail() {
+//        emailService.sendSimpleEmail("fischerrobson@gmail.com", "TEST", "Hello stranger");
+//    }
 
 }

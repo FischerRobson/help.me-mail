@@ -1,13 +1,21 @@
 package com.helpme.mail_ms.mail_ms.model;
 
-import lombok.NoArgsConstructor;
+import com.helpme.mail_ms.mail_ms.services.EmailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@NoArgsConstructor
+import java.util.HashMap;
+import java.util.Map;
+
+@Component
 public class EmailEventBuilder {
     private String receiver;
     private String ticketId;
     private String title;
     private String body;
+
 
     public EmailEventBuilder setReceiver(String receiver) {
         this.receiver = receiver;
@@ -19,19 +27,19 @@ public class EmailEventBuilder {
         return this;
     }
 
-    public EmailEventBuilder setTitle(String title) {
+    private EmailEventBuilder setTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public EmailEventBuilder setBody(String body) {
+    private EmailEventBuilder setBody(String body) {
         this.body = body;
         return this;
     }
 
     public EmailEventBuilder handleCreateTicket() {
-        this.setTitle("Your Ticket is Updated");
-        this.setBody("Your ticket has been updated with the latest information.");
+        this.setTitle("Your Ticket is Created");
+        this.setBody("Your ticket has been created and and will soon be processed.");
         return this;
     }
 
@@ -64,12 +72,11 @@ public class EmailEventBuilder {
 
         Email email = new Email();
         email.setReceiver(receiver);
-        email.setTitle(title);
-        email.setBody(body);
-        return email;
-    }
+        Map<String, Object> vars = new HashMap<>();
+        vars.put("title", this.title);
+        vars.put("body", this.body);
+        email.setVariables(vars);
 
-    public void sendEmail() {
-        System.out.println("sendEmail");
+        return email;
     }
 }
