@@ -2,9 +2,9 @@ package com.helpme.mail_ms.mail_ms.events;
 
 import com.helpme.mail_ms.mail_ms.constants.Constants;
 import com.helpme.mail_ms.mail_ms.constants.EventType;
-import com.helpme.mail_ms.mail_ms.model.Email;
-import com.helpme.mail_ms.mail_ms.model.EmailEventBuilder;
+import com.helpme.mail_ms.mail_ms.model.*;
 import com.helpme.mail_ms.mail_ms.services.EmailService;
+import com.helpme.mail_ms.mail_ms.services.WhatsAppService;
 import jakarta.mail.MessagingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,48 +22,35 @@ public class EmailEventListener {
     private Constants constants;
 
     @Autowired
-    EmailEventBuilder emailEventBuilder;
+    private WhatsAppService whatsAppService;
+
+    @Autowired
+    private MessageBuilder messageBuilder;
 
     private static final Logger logger = LoggerFactory.getLogger(EmailEventListener.class);
 
     @RabbitListener(queues = "#{constants.EMAIL_QUEUE}")
-    public void listen(String message) throws MessagingException {
+    public void listen(String rawMessage) throws MessagingException {
 
         logger.info("Reading message from queue...");
-        String[] parts = message.split("\\|");
-        String ticketId = parts[0];
-        String to = parts[1];
-        String event = parts[2];
+        Message message = messageBuilder.parse(rawMessage);
 
-        emailEventBuilder.setTicketId(ticketId).setReceiver(to);
+        NotificationService service = null;
 
-        try {
-            EventType eventType = EventType.fromString(event);
-
-            switch (eventType) {
-                case TICKET_CREATED:
-                    emailEventBuilder.handleCreateTicket();
-                    break;
-                case TICKET_UPDATED:
-                    emailEventBuilder.handleTicketUpdated();
-                    break;
-                case TICKET_CLOSED:
-                    emailEventBuilder.handleTicketClosed();
-                    break;
-                case CHAT_ADD:
-                    emailEventBuilder.handleChatAdd();
-                    break;
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Unknown event type: " + event);
+        if(message.getKind().equals("WHATSAPP")) {
+            service = whatsAppService;
+        } else if(message.getKind().equals("EMAIL")) {
+            service = emailService;
         }
 
-        Email email = emailEventBuilder.build();
+        if(service == null) {
+            throw new RuntimeException("Invalid kind of service");
+        }
 
         try {
-            emailService.sendSimpleEmail(email);
+            service.sendNotification(message);
         } catch (Exception e) {
-            logger.info("Failed to sent email to " + to + " | ticket " + ticketId);
+            logger.warn("Failed to sent email to {} | ticket {}", message.getReceiver(), message.getTicketId());
         }
     }
 

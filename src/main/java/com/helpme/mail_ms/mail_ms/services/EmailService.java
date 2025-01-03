@@ -1,8 +1,14 @@
 package com.helpme.mail_ms.mail_ms.services;
 
+import com.helpme.mail_ms.mail_ms.events.EmailEventListener;
 import com.helpme.mail_ms.mail_ms.model.Email;
+import com.helpme.mail_ms.mail_ms.model.EmailBuilder;
+import com.helpme.mail_ms.mail_ms.model.Message;
+import com.helpme.mail_ms.mail_ms.model.NotificationService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -11,7 +17,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
 @Service
-public class EmailService {
+public class EmailService implements NotificationService {
 
     @Autowired
     private JavaMailSender mailSender;
@@ -19,20 +25,49 @@ public class EmailService {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
-    public void sendSimpleEmail(Email email) throws MessagingException {
+    @Autowired
+    EmailBuilder emailBuilder;
+
+    private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
+
+    public void sendNotification(Message message) {
+
+        emailBuilder.setTicketId(message.getTicketId()).setReceiver(message.getReceiver());
+
+        switch (message.getEventType()) {
+            case TICKET_CREATED:
+                emailBuilder.handleCreateTicket();
+                break;
+            case TICKET_UPDATED:
+                emailBuilder.handleTicketUpdated();
+                break;
+            case TICKET_CLOSED:
+                emailBuilder.handleTicketClosed();
+                break;
+            case CHAT_ADD:
+                emailBuilder.handleChatAdd();
+                break;
+        }
+
+        Email email = this.emailBuilder.build();
 
         Context context = new Context();
         context.setVariables(email.getVariables());
 
         String emailContent = templateEngine.process("email-template", context);
 
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+       try {
+           MimeMessage mimeMessage = mailSender.createMimeMessage();
+           MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-        helper.setTo(email.getReceiver());
-        helper.setSubject(email.getVariables().get("title").toString());
-        helper.setText(emailContent, true);
+           helper.setTo(email.getReceiver());
+           helper.setSubject(email.getVariables().get("title").toString());
+           helper.setText(emailContent, true);
 
-        mailSender.send(message);
+           mailSender.send(mimeMessage);
+       } catch (MessagingException e) {
+           logger.error("Error on build email", e);
+       }
     }
+
 }
