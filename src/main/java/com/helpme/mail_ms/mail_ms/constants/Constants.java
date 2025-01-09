@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Constants {
 
-    @Value("${rabbitmq.queue.email}")
-    public String EMAIL_QUEUE;
+    @Value("${rabbitmq.queue.notification}")
+    public String NOTIFICATION_QUEUE;
 }

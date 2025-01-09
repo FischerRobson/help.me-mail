@@ -1,6 +1,5 @@
 package com.helpme.mail_ms.mail_ms.services;
 
-
 import com.helpme.mail_ms.mail_ms.model.Message;
 import com.helpme.mail_ms.mail_ms.model.NotificationService;
 import com.helpme.mail_ms.mail_ms.model.WhatsApp;
@@ -8,7 +7,9 @@ import com.helpme.mail_ms.mail_ms.model.WhatsAppBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WhatsAppService implements NotificationService {
 
     private static final Logger logger = LoggerFactory.getLogger(WhatsAppService.class);

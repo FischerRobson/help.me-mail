@@ -1,6 +1,5 @@
 package com.helpme.mail_ms.mail_ms.services;
 
-import com.helpme.mail_ms.mail_ms.events.EmailEventListener;
 import com.helpme.mail_ms.mail_ms.model.Email;
 import com.helpme.mail_ms.mail_ms.model.EmailBuilder;
 import com.helpme.mail_ms.mail_ms.model.Message;
@@ -65,8 +64,9 @@ public class EmailService implements NotificationService {
            helper.setText(emailContent, true);
 
            mailSender.send(mimeMessage);
+           logger.info("Email sent to {} with success!", email.getReceiver());
        } catch (MessagingException e) {
-           logger.error("Error on build email", e);
+           logger.error("Error on sent email", e);
        }
     }
 

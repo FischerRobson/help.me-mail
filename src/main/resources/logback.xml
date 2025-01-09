@@ -1,0 +1,16 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level){FATAL=\u001b[31m, ERROR=\u001b[31m, WARN=\u001b[33m, INFO=\u001b[32m, DEBUG=\u001b[34m, TRACE=\u001b[36m} %cyan(%logger{36}) - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- Suppress Jakarta Mail logs -->
+    <logger name="jakarta.mail" level="WARN" />
+
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>

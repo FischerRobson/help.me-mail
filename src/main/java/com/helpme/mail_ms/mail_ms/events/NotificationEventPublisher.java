@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailEventPublisher {
+public class NotificationEventPublisher {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -15,6 +15,6 @@ public class EmailEventPublisher {
     private Constants constants;
 
     public void sendEmailEvent(String message) {
-        rabbitTemplate.convertAndSend(constants.EMAIL_QUEUE, message);
+        rabbitTemplate.convertAndSend(constants.NOTIFICATION_QUEUE, message);
     }
 }

@@ -1,7 +1,6 @@
 package com.helpme.mail_ms.mail_ms.events;
 
 import com.helpme.mail_ms.mail_ms.constants.Constants;
-import com.helpme.mail_ms.mail_ms.constants.EventType;
 import com.helpme.mail_ms.mail_ms.model.*;
 import com.helpme.mail_ms.mail_ms.services.EmailService;
 import com.helpme.mail_ms.mail_ms.services.WhatsAppService;
@@ -13,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmailEventListener {
+public class NotificationEventListener {
 
     @Autowired
     private EmailService emailService;
@@ -27,13 +26,21 @@ public class EmailEventListener {
     @Autowired
     private MessageBuilder messageBuilder;
 
-    private static final Logger logger = LoggerFactory.getLogger(EmailEventListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(NotificationEventListener.class);
 
-    @RabbitListener(queues = "#{constants.EMAIL_QUEUE}")
+    @RabbitListener(queues = "#{constants.NOTIFICATION_QUEUE}")
     public void listen(String rawMessage) throws MessagingException {
 
         logger.info("Reading message from queue...");
-        Message message = messageBuilder.parse(rawMessage);
+
+        Message message = null;
+
+        try {
+            message = messageBuilder.parse(rawMessage);
+        } catch (IllegalArgumentException exception) {
+            logger.error("Failed to parse message: {}", rawMessage);
+            return;
+        }
 
         NotificationService service = null;
 
@@ -50,7 +57,7 @@ public class EmailEventListener {
         try {
             service.sendNotification(message);
         } catch (Exception e) {
-            logger.warn("Failed to sent email to {} | ticket {}", message.getReceiver(), message.getTicketId());
+            logger.warn("Failed to notify to {} | ticket {}", message.getReceiver(), message.getTicketId());
         }
     }
 

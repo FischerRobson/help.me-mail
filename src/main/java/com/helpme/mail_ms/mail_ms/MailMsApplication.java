@@ -1,13 +1,19 @@
 package com.helpme.mail_ms.mail_ms;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.fusesource.jansi.AnsiConsole;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MailMsApplication {
+	private static final Logger logger = LoggerFactory.getLogger(MailMsApplication.class);
 
 	public static void main(String[] args) {
+		AnsiConsole.systemInstall();
+
 		Dotenv dotenv = null;
 		try {
 			dotenv = Dotenv.load();
@@ -19,8 +25,9 @@ public class MailMsApplication {
 			System.setProperty("EMAIL_USERNAME", dotenv.get("EMAIL_USERNAME"));
 			System.setProperty("EMAIL_PASSWORD", dotenv.get("EMAIL_PASSWORD"));
 			System.setProperty("RABBITMQ_HOST", dotenv.get("RABBITMQ_HOST"));
-			System.setProperty("RABBITMQ_EMAIL_QUEUE", dotenv.get("RABBITMQ_EMAIL_QUEUE"));
+			System.setProperty("RABBITMQ_NOTIFICATION_QUEUE", dotenv.get("RABBITMQ_NOTIFICATION_QUEUE"));
 		}
 		SpringApplication.run(MailMsApplication.class, args);
+		AnsiConsole.systemUninstall();
 	}
 }

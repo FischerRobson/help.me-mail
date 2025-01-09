@@ -1,5 +1,8 @@
 package com.helpme.mail_ms.mail_ms.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class WhatsAppBuilder {
     private String receiver;
     private String ticketId;

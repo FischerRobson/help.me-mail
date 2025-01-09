@@ -1,9 +1,8 @@
 package com.helpme.mail_ms.mail_ms.controllers;
 
-import com.helpme.mail_ms.mail_ms.events.EmailEventPublisher;
+import com.helpme.mail_ms.mail_ms.events.NotificationEventPublisher;
 import com.helpme.mail_ms.mail_ms.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmailController {
 
     @Autowired
-    EmailEventPublisher emailEventPublisher;
+    NotificationEventPublisher emailEventPublisher;
 
     @Autowired
     EmailService emailService;
