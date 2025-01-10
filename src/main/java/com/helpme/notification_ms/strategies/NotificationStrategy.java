@@ -1,10 +1,10 @@
-package com.helpme.mail_ms.mail_ms.strategies;
+package com.helpme.notification_ms.strategies;
 
-import com.helpme.mail_ms.mail_ms.model.Message;
-import com.helpme.mail_ms.mail_ms.model.NotificationKinds;
-import com.helpme.mail_ms.mail_ms.model.NotificationService;
-import com.helpme.mail_ms.mail_ms.services.EmailService;
-import com.helpme.mail_ms.mail_ms.services.WhatsAppService;
+import com.helpme.notification_ms.model.Message;
+import com.helpme.notification_ms.model.NotificationKinds;
+import com.helpme.notification_ms.model.NotificationService;
+import com.helpme.notification_ms.services.EmailService;
+import com.helpme.notification_ms.services.WhatsAppService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

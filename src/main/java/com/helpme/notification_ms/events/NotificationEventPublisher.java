@@ -1,6 +1,6 @@
-package com.helpme.mail_ms.mail_ms.events;
+package com.helpme.notification_ms.events;
 
-import com.helpme.mail_ms.mail_ms.rabbitmq.RabbitMQConfig;
+import com.helpme.notification_ms.rabbitmq.RabbitMQConfig;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

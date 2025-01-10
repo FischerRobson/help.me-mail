@@ -1,4 +1,4 @@
-package com.helpme.mail_ms.mail_ms.security;
+package com.helpme.notification_ms.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

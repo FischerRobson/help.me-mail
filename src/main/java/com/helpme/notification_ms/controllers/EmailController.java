@@ -1,7 +1,7 @@
-package com.helpme.mail_ms.mail_ms.controllers;
+package com.helpme.notification_ms.controllers;
 
-import com.helpme.mail_ms.mail_ms.events.NotificationEventPublisher;
-import com.helpme.mail_ms.mail_ms.services.EmailService;
+import com.helpme.notification_ms.events.NotificationEventPublisher;
+import com.helpme.notification_ms.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

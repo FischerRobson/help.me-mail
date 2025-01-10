@@ -1,8 +1,11 @@
-package com.helpme.mail_ms.mail_ms.events;
+package com.helpme.notification_ms.events;
 
 import com.helpme.mail_ms.mail_ms.model.*;
-import com.helpme.mail_ms.mail_ms.rabbitmq.RabbitMQConfig;
-import com.helpme.mail_ms.mail_ms.strategies.NotificationStrategy;
+import com.helpme.notification_ms.model.Message;
+import com.helpme.notification_ms.model.MessageBuilder;
+import com.helpme.notification_ms.model.NotificationService;
+import com.helpme.notification_ms.rabbitmq.RabbitMQConfig;
+import com.helpme.notification_ms.strategies.NotificationStrategy;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

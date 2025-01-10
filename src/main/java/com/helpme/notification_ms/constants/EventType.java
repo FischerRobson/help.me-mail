@@ -1,4 +1,4 @@
-package com.helpme.mail_ms.mail_ms.constants;
+package com.helpme.notification_ms.constants;
 
 public enum EventType {
     TICKET_CREATED("TICKET_CREATED"),

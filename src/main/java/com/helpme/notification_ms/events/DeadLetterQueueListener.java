@@ -1,9 +1,7 @@
-package com.helpme.mail_ms.mail_ms.events;
+package com.helpme.notification_ms.events;
 
-import com.helpme.mail_ms.mail_ms.rabbitmq.RabbitMQConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component

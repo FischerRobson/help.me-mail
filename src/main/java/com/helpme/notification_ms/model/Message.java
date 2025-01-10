@@ -1,6 +1,6 @@
-package com.helpme.mail_ms.mail_ms.model;
+package com.helpme.notification_ms.model;
 
-import com.helpme.mail_ms.mail_ms.constants.EventType;
+import com.helpme.notification_ms.constants.EventType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

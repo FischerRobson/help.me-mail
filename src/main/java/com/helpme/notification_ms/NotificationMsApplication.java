@@ -1,4 +1,4 @@
-package com.helpme.mail_ms.mail_ms;
+package com.helpme.notification_ms;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.fusesource.jansi.AnsiConsole;
@@ -10,8 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-public class MailMsApplication {
-	private static final Logger logger = LoggerFactory.getLogger(MailMsApplication.class);
+public class NotificationMsApplication {
+	private static final Logger logger = LoggerFactory.getLogger(NotificationMsApplication.class);
 
 	public static void main(String[] args) {
 		AnsiConsole.systemInstall();
@@ -20,7 +20,7 @@ public class MailMsApplication {
 		try {
 			dotenv = Dotenv.load();
 		} catch (Exception e) {
-			System.out.println(".env file not found, assuming environment variables are set externally.");
+			logger.info(".env file not found, assuming environment variables are set externally.");
 		}
 
 		if (dotenv != null) {
@@ -30,7 +30,7 @@ public class MailMsApplication {
 			System.setProperty("RABBITMQ_NOTIFICATION_QUEUE", dotenv.get("RABBITMQ_NOTIFICATION_QUEUE"));
 			System.setProperty("RABBITMQ_DEAD_LETTER_QUEUE", dotenv.get("RABBITMQ_DEAD_LETTER_QUEUE"));
 		}
-		SpringApplication.run(MailMsApplication.class, args);
+		SpringApplication.run(NotificationMsApplication.class, args);
 		AnsiConsole.systemUninstall();
 	}
 }

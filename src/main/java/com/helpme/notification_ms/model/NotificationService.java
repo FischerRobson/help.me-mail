@@ -1,4 +1,4 @@
-package com.helpme.mail_ms.mail_ms.model;
+package com.helpme.notification_ms.model;
 
 public interface NotificationService{
 

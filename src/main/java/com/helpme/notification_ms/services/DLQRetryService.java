@@ -1,6 +1,6 @@
-package com.helpme.mail_ms.mail_ms.services;
+package com.helpme.notification_ms.services;
 
-import com.helpme.mail_ms.mail_ms.rabbitmq.RabbitMQConfig;
+import com.helpme.notification_ms.rabbitmq.RabbitMQConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;

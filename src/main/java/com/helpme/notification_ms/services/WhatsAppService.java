@@ -1,9 +1,9 @@
-package com.helpme.mail_ms.mail_ms.services;
+package com.helpme.notification_ms.services;
 
-import com.helpme.mail_ms.mail_ms.model.Message;
-import com.helpme.mail_ms.mail_ms.model.NotificationService;
-import com.helpme.mail_ms.mail_ms.model.WhatsApp;
-import com.helpme.mail_ms.mail_ms.model.WhatsAppBuilder;
+import com.helpme.notification_ms.model.Message;
+import com.helpme.notification_ms.model.NotificationService;
+import com.helpme.notification_ms.model.WhatsApp;
+import com.helpme.notification_ms.model.WhatsAppBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.helpme.mail_ms.mail_ms.rabbitmq;
+package com.helpme.notification_ms.rabbitmq;
 
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Value;
