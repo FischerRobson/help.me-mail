@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Message {
-    private String kind;
+    private NotificationKinds kind;
     private String receiver;
     private String ticketId;
     private EventType eventType;

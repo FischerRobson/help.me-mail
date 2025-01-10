@@ -14,7 +14,7 @@ public class MessageBuilder {
         try {
             return objectMapper.readValue(rawMessage, Message.class);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Failed to parse message: " + rawMessage, e);
+            throw new IllegalArgumentException("Invalid message format");
         }
     }
 

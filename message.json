@@ -1,0 +1,6 @@
+{
+  "kind": "EMAIL",
+  "receiver": "fischerrobson@gmail.com",
+  "ticketId": "1",
+  "eventType": "CHAT_ADD"
+}

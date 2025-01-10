@@ -1,64 +1,86 @@
 package com.helpme.mail_ms.mail_ms.events;
 
-import com.helpme.mail_ms.mail_ms.constants.Constants;
 import com.helpme.mail_ms.mail_ms.model.*;
-import com.helpme.mail_ms.mail_ms.services.EmailService;
-import com.helpme.mail_ms.mail_ms.services.WhatsAppService;
-import jakarta.mail.MessagingException;
+import com.helpme.mail_ms.mail_ms.rabbitmq.RabbitMQConfig;
+import com.helpme.mail_ms.mail_ms.strategies.NotificationStrategy;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @Component
-public class NotificationEventListener {
-
-    @Autowired
-    private EmailService emailService;
-
-    @Autowired
-    private Constants constants;
-
-    @Autowired
-    private WhatsAppService whatsAppService;
+public class NotificationEventListener implements DisposableBean {
 
     @Autowired
     private MessageBuilder messageBuilder;
 
+    @Autowired
+    private NotificationStrategy notificationStrategy;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private RabbitMQConfig rabbitMQConfig;
+
+    private ExecutorService executorService;
+
     private static final Logger logger = LoggerFactory.getLogger(NotificationEventListener.class);
 
-    @RabbitListener(queues = "#{constants.NOTIFICATION_QUEUE}")
-    public void listen(String rawMessage) throws MessagingException {
+    @PostConstruct
+    public void initializeExecutor() {
+        executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    }
 
-        logger.info("Reading message from queue...");
+    @RabbitListener(queues = "#{rabbitMQConfig.getNotificationQueue()}")
+    public void listen(String rawMessage) {
 
-        Message message = null;
+        logger.info("Reading message from notification queue");
 
+        executorService.submit(() -> {
+            Message message = null;
+
+            try {
+                message = messageBuilder.parse(rawMessage);
+            } catch (IllegalArgumentException exception) {
+                logger.error("Failed to parse message: {}", rawMessage);
+               // rabbitTemplate.convertAndSend(RabbitMQConfig.DLX_EXCHANGE, rabbitMQConfig.getDlqQueue(), rawMessage);
+                sendToDlq(rawMessage);
+                return;
+            }
+
+            NotificationService service = notificationStrategy.getNotificationStrategy(message);
+
+//            try {
+//                service.sendNotification(message);
+//                logger.info("Successfully sent notification to {} for ticket {}", message.getReceiver(), message.getTicketId());
+//            } catch (Exception e) {
+//                logger.error("Failed to notify to {} | ticket {}", message.getReceiver(), message.getTicketId(), e);
+//                rabbitTemplate.convertAndSend(RabbitMQConfig.DLX_EXCHANGE, rabbitMQConfig.getDlqQueue(), rawMessage);
+//            }
+        });
+    }
+
+    private void sendToDlq(String rawMessage) {
         try {
-            message = messageBuilder.parse(rawMessage);
-        } catch (IllegalArgumentException exception) {
-            logger.error("Failed to parse message: {}", rawMessage);
-            return;
-        }
-
-        NotificationService service = null;
-
-        if(message.getKind().equals("WHATSAPP")) {
-            service = whatsAppService;
-        } else if(message.getKind().equals("EMAIL")) {
-            service = emailService;
-        }
-
-        if(service == null) {
-            throw new RuntimeException("Invalid kind of service");
-        }
-
-        try {
-            service.sendNotification(message);
+            logger.info("Sending message to DLQ...");
+            rabbitTemplate.convertAndSend("dlx_exchange", "dead_letter_queue", rawMessage);
         } catch (Exception e) {
-            logger.warn("Failed to notify to {} | ticket {}", message.getReceiver(), message.getTicketId());
+            logger.error("Failed to send message to DLQ: {}", rawMessage, e);
         }
     }
 
+    @Override
+    public void destroy() throws Exception {
+        if (executorService != null) {
+            executorService.shutdown();
+        }
+    }
 }
