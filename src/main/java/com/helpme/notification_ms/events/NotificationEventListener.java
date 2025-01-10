@@ -1,6 +1,5 @@
 package com.helpme.notification_ms.events;
 
-import com.helpme.mail_ms.mail_ms.model.*;
 import com.helpme.notification_ms.model.Message;
 import com.helpme.notification_ms.model.MessageBuilder;
 import com.helpme.notification_ms.model.NotificationService;
